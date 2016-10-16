@@ -18,18 +18,19 @@ print "last item: " + str(vs_access[-1])
 print "avg: " + str(s/len(vs_access))
 
 i = 0
+STEP = 20
 vs_access_compressed = []
 while i < len(vs_access):
-  vs_slice = vs_access[i: i+20]
+  vs_slice = vs_access[i: i+STEP]
   sum_x = 0
   sum_y = 0
   for ii in vs_slice:
   	sum_x += ii[0]
   	sum_y += ii[1]
-  avg_x = sum_x / 20
-  avg_y = sum_y / 20
+  avg_x = sum_x / STEP
+  avg_y = sum_y / STEP
   vs_access_compressed.append((avg_x, avg_y))
-  i += 20
+  i += STEP
 
 # vs_access_int = {}
 # f = open('vs_access_compressed.txt', 'w')

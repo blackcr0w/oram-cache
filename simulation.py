@@ -11,7 +11,7 @@ PARAMS = {'virtual_memory_size': [str, "100GB"],
           'visible_storage_size': [str, "10GB"],
           'cell_size': [str, "100KB"],
           'object_size': [str, "100KB"],
-          'access_number': [long, 2e8],
+          'access_number': [long, 5e7],
           'access_distribution': [str, "exp"],
           'deterministic': [str, 1]
          }
@@ -205,13 +205,16 @@ print read_num
 print write_num
 # print vs_access
 vs_access_int = {}
+f = open('vs_access.txt', 'w')
 for i in vs_access:
+  f.write(str(i) + '\n')
   addr = int(i.split("##")[0])
   if not vs_access_int.has_key(addr):
     vs_access_int[addr] = 1
   else: vs_access_int[addr] += 1
-
+f.close()
 vs_access_tuple = vs_access_int.items()
 vs_access_tuple = zip(*vs_access_tuple)
-plt.scatter(*vs_access_tuple)
+# plt.scatter(*vs_access_tuple)
+plt.plot(*vs_access_tuple)
 plt.savefig('vs_access.jpg')

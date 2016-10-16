@@ -119,7 +119,10 @@ for _ in range(access_number):
   if hidden_obj_table.has_key(va):
     # if hit(x) in hidden storage
     a = random.choice(visible_storage_table.keys())
-    b = random.choice(hidden_storage_table.keys())
+    while True:
+      b = random.choice(hidden_storage_table.keys())
+      if hidden_storage_table[b] != va:
+        break
 
     # read from a, discard
     discard(a, visible_storage_table, visible_obj_table)
@@ -134,7 +137,10 @@ for _ in range(access_number):
     hidden_obj_table[va].append(b)
 
     c = random.choice(visible_storage_table.keys())
-    d = random.choice(hidden_storage_table.keys())
+    while True:
+      d = random.choice(hidden_storage_table.keys())
+      if hidden_storage_table[d] != va:
+        break
     # swap c, d
     swap(c, d)
     vs_access.append(str(c)+'##'+'R')
@@ -151,7 +157,10 @@ for _ in range(access_number):
     vs_access.append(str(a)+'##'+'R')
     vs_access.append(str(a)+'##'+'W')    
 
-    c = random.choice(visible_storage_table.keys())
+    while True:
+      c = random.choice(visible_storage_table.keys())
+      if visible_storage_table[c] != va:
+        break    
     d = random.choice(hidden_storage_table.keys())
     # read from c, discard
     discard(c, visible_storage_table, visible_obj_table)
@@ -182,7 +191,7 @@ for _ in range(access_number):
     # write b into a
     write(a, b, visible_storage_table, visible_obj_table, 
       hidden_storage_table, hidden_obj_table)
-    vs_access.append(str(b)+'##'+'W')
+    vs_access.append(str(a)+'##'+'W')
     # write hit(x) into b
     discard(b, hidden_storage_table, hidden_obj_table)
     hidden_storage_table[b] = va
